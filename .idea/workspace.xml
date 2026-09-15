@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f65d26f-aa9a-4af6-8567-79ee22873910" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/ConsultaSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/ConsultaSeeder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/UsuarioSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/UsuarioSeeder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +51,8 @@
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/fabricio/Documents/MyProjects/tech-challlenge-fase3",
     "node.js.detected.package.jshint": "true",
-    "node.js.selected.package.jshint": ""
+    "node.js.selected.package.jshint": "",
+    "nodejs_package_manager_path": "npm"
   }
 }]]></component>
   <component name="RecentsManager">

@@ -23,10 +23,6 @@ public class UsuarioSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (usuarioRepository.count() > 0) {
-            return;
-        }
-
         criarUsuario("medico", Perfil.MEDICO);
         criarUsuario("enfermeiro", Perfil.ENFERMEIRO);
         criarUsuario("paciente", Perfil.PACIENTE);

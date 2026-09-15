@@ -26,10 +26,6 @@ public class ConsultaSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (consultaRepository.count() > 0) {
-            return;
-        }
-
         Usuario medico = buscarUsuario("medico");
         Usuario paciente1 = buscarUsuario("paciente");
         Usuario paciente2 = buscarUsuario("paciente2");
