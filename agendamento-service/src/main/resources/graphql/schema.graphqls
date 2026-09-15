@@ -1,0 +1,36 @@
+type Query {
+    historicoDoPaciente(pacienteId: ID!): [Consulta!]!
+    consultasFuturas(pacienteId: ID!): [Consulta!]!
+}
+
+type Mutation {
+    registrarConsulta(pacienteId: ID!, medicoId: ID!, dataHora: String!, observacoes: String): Consulta!
+    editarConsulta(id: ID!, dataHora: String, status: StatusConsulta, observacoes: String): Consulta!
+}
+
+type Consulta {
+    id: ID!
+    paciente: Usuario!
+    medico: Usuario!
+    dataHora: String!
+    status: StatusConsulta!
+    observacoes: String
+}
+
+type Usuario {
+    id: ID!
+    username: String!
+    perfil: Perfil!
+}
+
+enum StatusConsulta {
+    AGENDADA
+    REALIZADA
+    CANCELADA
+}
+
+enum Perfil {
+    MEDICO
+    ENFERMEIRO
+    PACIENTE
+}

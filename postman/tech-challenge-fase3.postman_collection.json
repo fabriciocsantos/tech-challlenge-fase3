@@ -1,0 +1,241 @@
+{
+	"info": {
+		"name": "Tech Challenge Fase 3 - Agendamento Hospitalar",
+		"description": "Collection para testar o agendamento-service (GraphQL) e o notificacao-service (REST). Assume banco recém-criado pelo docker-compose + seed padrão (medico=id 1, enfermeiro=id 2, paciente=id 3). Rode 'Registrar consulta (medico)' antes de 'Editar consulta', ele guarda o id criado na variavel consulta_id automaticamente.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{ "key": "agendamento_url", "value": "http://localhost:8080" },
+		{ "key": "notificacao_url", "value": "http://localhost:8082" },
+		{ "key": "consulta_id", "value": "" }
+	],
+	"item": [
+		{
+			"name": "Agendamento Service (GraphQL)",
+			"item": [
+				{
+					"name": "Autenticação",
+					"item": [
+						{
+							"name": "Sem autenticação (espera 401)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": { "type": "noauth" },
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"{ historicoDoPaciente(pacienteId: 3) { id } }\"\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						}
+					]
+				},
+				{
+					"name": "Consultas - Queries",
+					"item": [
+						{
+							"name": "Histórico do paciente (paciente vê o próprio)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "paciente" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"query($pacienteId: ID!) { historicoDoPaciente(pacienteId: $pacienteId) { id status dataHora observacoes medico { username } } }\",\n  \"variables\": { \"pacienteId\": 3 }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Histórico de outro paciente (espera FORBIDDEN)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "paciente" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"query($pacienteId: ID!) { historicoDoPaciente(pacienteId: $pacienteId) { id } }\",\n  \"variables\": { \"pacienteId\": 2 }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Consultas futuras do paciente (enfermeiro)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "enfermeiro" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"query($pacienteId: ID!) { consultasFuturas(pacienteId: $pacienteId) { id status dataHora } }\",\n  \"variables\": { \"pacienteId\": 3 }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						}
+					]
+				},
+				{
+					"name": "Consultas - Mutations",
+					"item": [
+						{
+							"name": "Registrar consulta (médico)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const json = pm.response.json();",
+											"const consulta = json.data && json.data.registrarConsulta;",
+											"if (consulta) {",
+											"    pm.collectionVariables.set('consulta_id', consulta.id);",
+											"    console.log('consulta_id salvo:', consulta.id);",
+											"}"
+										]
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "medico" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"mutation($pacienteId: ID!, $medicoId: ID!, $dataHora: String!, $observacoes: String) { registrarConsulta(pacienteId: $pacienteId, medicoId: $medicoId, dataHora: $dataHora, observacoes: $observacoes) { id status } }\",\n  \"variables\": {\n    \"pacienteId\": 3,\n    \"medicoId\": 1,\n    \"dataHora\": \"2026-12-01T10:00:00\",\n    \"observacoes\": \"Consulta de rotina (registrada pelo médico)\"\n  }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Registrar consulta (enfermeiro)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "enfermeiro" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"mutation($pacienteId: ID!, $medicoId: ID!, $dataHora: String!, $observacoes: String) { registrarConsulta(pacienteId: $pacienteId, medicoId: $medicoId, dataHora: $dataHora, observacoes: $observacoes) { id status } }\",\n  \"variables\": {\n    \"pacienteId\": 3,\n    \"medicoId\": 1,\n    \"dataHora\": \"2026-12-02T10:00:00\",\n    \"observacoes\": \"Consulta de retorno (registrada pelo enfermeiro)\"\n  }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Registrar consulta como paciente (espera FORBIDDEN)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "paciente" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"mutation($pacienteId: ID!, $medicoId: ID!, $dataHora: String!) { registrarConsulta(pacienteId: $pacienteId, medicoId: $medicoId, dataHora: $dataHora) { id } }\",\n  \"variables\": {\n    \"pacienteId\": 3,\n    \"medicoId\": 1,\n    \"dataHora\": \"2026-12-03T10:00:00\"\n  }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Editar consulta (médico)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "medico" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"mutation($id: ID!, $status: StatusConsulta, $observacoes: String) { editarConsulta(id: $id, status: $status, observacoes: $observacoes) { id status observacoes } }\",\n  \"variables\": {\n    \"id\": \"{{consulta_id}}\",\n    \"status\": \"REALIZADA\",\n    \"observacoes\": \"Paciente compareceu\"\n  }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						},
+						{
+							"name": "Editar consulta (enfermeiro)",
+							"request": {
+								"method": "POST",
+								"header": [{ "key": "Content-Type", "value": "application/json" }],
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{ "key": "username", "value": "enfermeiro" },
+										{ "key": "password", "value": "123456" }
+									]
+								},
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"query\": \"mutation($id: ID!, $status: StatusConsulta) { editarConsulta(id: $id, status: $status) { id status } }\",\n  \"variables\": {\n    \"id\": \"{{consulta_id}}\",\n    \"status\": \"CANCELADA\"\n  }\n}"
+								},
+								"url": "{{agendamento_url}}/graphql"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notificacao Service (REST)",
+			"item": [
+				{
+					"name": "Listar notificações (autenticado)",
+					"request": {
+						"method": "GET",
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{ "key": "username", "value": "equipe-hospital" },
+								{ "key": "password", "value": "123456" }
+							]
+						},
+						"url": "{{notificacao_url}}/api/notificacoes"
+					}
+				},
+				{
+					"name": "Listar notificações sem autenticação (espera 401)",
+					"request": {
+						"method": "GET",
+						"auth": { "type": "noauth" },
+						"url": "{{notificacao_url}}/api/notificacoes"
+					}
+				}
+			]
+		}
+	]
+}
