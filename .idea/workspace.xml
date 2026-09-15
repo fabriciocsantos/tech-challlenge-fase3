@@ -5,23 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f65d26f-aa9a-4af6-8567-79ee22873910" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/agendamento-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agendamento-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/agendamento-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/notificacao-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/gradlew" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/gradlew.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/notificacao-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/notificacao-service/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/UsuarioSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/agendamento-service/src/main/java/br/com/fiap/techchallenge/agendamento_service/config/UsuarioSeeder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,22 +33,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AgendamentoServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/fabricio/Documents/MyProjects/tech-challlenge-fase3&quot;,
-    &quot;node.js.detected.package.jshint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.jshint&quot;: &quot;&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.AgendamentoServiceApplication.executor": "Run",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/fabricio/Documents/MyProjects/tech-challlenge-fase3",
+    "node.js.detected.package.jshint": "true",
+    "node.js.selected.package.jshint": ""
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.claude" />
